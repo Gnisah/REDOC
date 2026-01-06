@@ -1,0 +1,43 @@
+  body {
+        margin: 0;
+      }
+
+      /* โลโก้ซ้ายบน เหนือ search */
+      #sidebar-logo {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      #sidebar-logo img {
+        height: 72px;          /* ⬅ ใหญ่ขึ้น */
+        object-fit: contain;
+      }
+
+      #sidebar-logo span {
+        font-size: 30px;       /* ⬅ ใหญ่ขึ้น */
+        font-weight: 700;
+        color: #111827;
+        line-height: 1;
+      }
+
+      /* ดัน sidebar ลง ไม่ให้ชนโลโก้ */
+      .menu-content {
+        padding-top: 130px !important; /* ⬅ เพิ่มตามความสูงโลโก้ */
+      }
+
+      @media (max-width: 768px) {
+        #sidebar-logo img {
+          height: 56px;
+        }
+        #sidebar-logo span {
+          font-size: 24px;
+        }
+        .menu-content {
+          padding-top: 110px !important;
+        }
+      }
