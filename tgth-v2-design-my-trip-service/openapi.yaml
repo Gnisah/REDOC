@@ -1,0 +1,1037 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: "Design My Trip Service API"
+    version: 0.0.1
+    x-logo:
+        url: "https://play-lh.googleusercontent.com/hJUnoNdPEBWJ2YhN-peT1uwn6WIa69L0x_K-TRVDp1uhcsYM4ljPubNG11hN3Fh_NpQ"
+        altText: "Logo"
+paths:
+    /api/backend/design-my-trip-service/trip-input-options:
+        get:
+            tags:
+                - TripService
+            operationId: TripService_GetTripInputOptions
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTripInputOptionsResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/generate:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_GenerateTrip
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GenerateTripRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GenerateTripResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}:
+        get:
+            tags:
+                - TripService
+            operationId: TripService_GetTrip
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetTripResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - TripService
+            operationId: TripService_DeleteTrip
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultActionMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        patch:
+            tags:
+                - TripService
+            operationId: TripService_UpdateTrip
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateTripRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateTripResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/clone:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_CloneTrip
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CloneTripRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CloneTripResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/day:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_AddMoreDate
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GenerateTripResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/day/{tripDayId}:
+        delete:
+            tags:
+                - TripService
+            operationId: TripService_DeleteTripDay
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: tripDayId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultActionMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        patch:
+            tags:
+                - TripService
+            operationId: TripService_UpdateTripDay
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: tripDayId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateTripDayRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultActionMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/day/{tripDayId}/itinerary:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_CreateItinerary
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: tripDayId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ItineraryCreateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultActionMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/day/{tripDayId}/itinerary/{itineraryId}:
+        delete:
+            tags:
+                - TripService
+            operationId: TripService_DeleteItinerary
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: tripDayId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: itineraryId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteItineraryResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        patch:
+            tags:
+                - TripService
+            operationId: TripService_UpdateItinerary
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: tripDayId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: itineraryId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ItineraryUpdateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultActionMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/day/{tripDayId}/suggestion:
+        get:
+            tags:
+                - TripService
+            operationId: TripService_GetSuggestAttraction
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: tripDayId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetSuggestAttractionResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/save:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_SaveTrip
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SaveTripRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultActionMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/share:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_ShareTripViaEmail
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ShareTripViaEmailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ShareTripViaEmailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/share-link:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_CreateShareOnelink
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateOneLinkResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trip/{tripId}/update-order:
+        post:
+            tags:
+                - TripService
+            operationId: TripService_UpdateTripItineraryOrder
+            parameters:
+                - name: tripId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateTripItineraryOrderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultActionMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/design-my-trip-service/trips:
+        get:
+            tags:
+                - TripService
+            operationId: TripService_GetMyTrip
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetMyTripResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/design-my-trip-service/guest:
+        patch:
+            tags:
+                - GuestService
+            operationId: GuestService_MergeGuestUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MergeGuestUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MergeGuestUserResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /healthz:
+        get:
+            tags:
+                - HealthCheckService
+            operationId: HealthCheckService_Health
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /readyz:
+        get:
+            tags:
+                - HealthCheckService
+            operationId: HealthCheckService_Ready
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        Attraction:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                productId:
+                    type: integer
+                    format: int32
+                normalPrice:
+                    type: number
+                    format: double
+                tagthaiPrice:
+                    type: number
+                    format: double
+                isReservationRequired:
+                    type: boolean
+                google:
+                    $ref: '#/components/schemas/GoogleInfo'
+                media:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Media'
+                businessDays:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/BusinessDay'
+                isMultiBranch:
+                    type: boolean
+                ticketOnHandCount:
+                    type: integer
+                    format: int32
+                slug:
+                    type: string
+                status:
+                    type: string
+                brandName:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+        AttractionForSuggest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                google:
+                    $ref: '#/components/schemas/GoogleInfo'
+                media:
+                    $ref: '#/components/schemas/Media'
+                type:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+        BusinessDay:
+            type: object
+            properties:
+                dayOfWeek:
+                    type: integer
+                    format: int32
+                isOpened:
+                    type: boolean
+                openAt:
+                    type: string
+                closeAt:
+                    type: string
+        CloneTripRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripName:
+                    type: string
+        CloneTripResponse:
+            type: object
+            properties:
+                message:
+                    type: string
+                clonedTripId:
+                    type: string
+        CreateOneLinkResponse:
+            type: object
+            properties:
+                link:
+                    type: string
+        DefaultActionMessage:
+            type: object
+            properties:
+                status:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+        DefaultMessage:
+            type: object
+            properties:
+                status:
+                    type: string
+        DeleteItineraryResponse:
+            type: object
+            properties:
+                status:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+        GenerateTripLocation:
+            type: object
+            properties:
+                provinceId:
+                    type: integer
+                    format: int32
+                districtId:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                subdistrictId:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                areaId:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+        GenerateTripRequest:
+            type: object
+            properties:
+                startDate:
+                    type: string
+                endDate:
+                    type: string
+                interests:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                locations:
+                    $ref: '#/components/schemas/GenerateTripLocation'
+        GenerateTripResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TripDay'
+                tripId:
+                    type: string
+                tripName:
+                    type: string
+        GetMyTripResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/MyTrip'
+        GetSuggestAttractionResponse:
+            type: object
+            properties:
+                suggestAttractionList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttractionForSuggest'
+        GetTripInputOptionsResponse:
+            type: object
+            properties:
+                interests:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/InputOptions'
+                province:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/InputOptions'
+        GetTripResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TripDay'
+                tripId:
+                    type: string
+                tripName:
+                    type: string
+                isReadOnly:
+                    type: boolean
+                isSaved:
+                    type: boolean
+                provinceId:
+                    type: integer
+                    format: int32
+        GoogleInfo:
+            type: object
+            properties:
+                rating:
+                    type: number
+                    format: double
+                userRatingCount:
+                    type: integer
+                    format: int32
+                mapsUrl:
+                    type: string
+                latitude:
+                    type: number
+                    format: double
+                longitude:
+                    type: number
+                    format: double
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        InputOptions:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+        Itinerary:
+            type: object
+            properties:
+                itineraryId:
+                    type: string
+                attraction:
+                    $ref: '#/components/schemas/Attraction'
+                productOptionId:
+                    type: integer
+                    format: int32
+                attractionType:
+                    type: string
+                order:
+                    type: integer
+                    format: int32
+                preferTimeStart:
+                    type: string
+                preferTimeEnd:
+                    type: string
+                note:
+                    type: string
+                nextTravelMethod:
+                    type: integer
+                    format: int32
+        ItineraryCreateRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripDayId:
+                    type: string
+                attractionId:
+                    type: integer
+                    format: int32
+                order:
+                    type: integer
+                    format: int32
+                preferTimeStart:
+                    type: string
+                preferTimeEnd:
+                    type: string
+                note:
+                    type: string
+        ItineraryOrderRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                order:
+                    type: integer
+                    format: int32
+        ItineraryUpdateRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripDayId:
+                    type: string
+                itineraryId:
+                    type: string
+                order:
+                    type: integer
+                    format: int32
+                preferTimeStart:
+                    type: string
+                preferTimeEnd:
+                    type: string
+                note:
+                    type: string
+                nextTravelMethod:
+                    type: integer
+                    format: int32
+                attractionId:
+                    type: integer
+                    format: int32
+                attractionType:
+                    type: string
+        Media:
+            type: object
+            properties:
+                mediaType:
+                    type: string
+                data:
+                    type: string
+                position:
+                    type: string
+        MergeGuestUserRequest:
+            type: object
+            properties:
+                isDryRun:
+                    type: boolean
+                memberId:
+                    type: string
+                guestId:
+                    type: string
+        MergeGuestUserResponse:
+            type: object
+            properties:
+                status:
+                    type: integer
+                    format: int32
+                message:
+                    type: string
+        MyTrip:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripName:
+                    type: string
+                sharedBy:
+                    type: string
+                startDate:
+                    type: string
+                endDate:
+                    type: string
+                recentViewAt:
+                    type: string
+                displayAttractions:
+                    type: string
+        SaveTripRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripName:
+                    type: string
+        ShareTripViaEmailRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                receiverEmail:
+                    type: string
+                message:
+                    type: string
+                token:
+                    type: string
+        ShareTripViaEmailResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        TripDay:
+            type: object
+            properties:
+                tripDayId:
+                    type: string
+                day:
+                    type: integer
+                    format: int32
+                date:
+                    type: string
+                note:
+                    type: string
+                itineraries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Itinerary'
+        TripDayOrderRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                day:
+                    type: integer
+                    format: int32
+                itineraries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ItineraryOrderRequest'
+        UpdateTripDayRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripDayId:
+                    type: string
+                note:
+                    type: string
+        UpdateTripItineraryOrderRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripDayList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/TripDayOrderRequest'
+        UpdateTripRequest:
+            type: object
+            properties:
+                tripId:
+                    type: string
+                tripName:
+                    type: string
+                startDate:
+                    type: string
+                endDate:
+                    type: string
+        UpdateTripResponse:
+            type: object
+            properties:
+                message:
+                    type: string
+tags:
+    - name: GuestService
+    - name: HealthCheckService
+    - name: TripService
