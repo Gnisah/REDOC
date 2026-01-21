@@ -1,0 +1,3246 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: "API Documentation"
+    version: 0.0.1
+    x-logo:
+        url: "https://play-lh.googleusercontent.com/hJUnoNdPEBWJ2YhN-peT1uwn6WIa69L0x_K-TRVDp1uhcsYM4ljPubNG11hN3Fh_NpQ"
+        altText: "Logo"
+paths:
+    /api/backend-public/attraction-service/interests:
+        get:
+            tags:
+                - InterestService
+            operationId: InterestService_ListInterest
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.interestId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.isDmt
+                  in: query
+                  schema:
+                    type: boolean
+                - name: filter.isTicket
+                  in: query
+                  schema:
+                    type: boolean
+                - name: filter.isExplore
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListInterestResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/attraction/slug/{slugName}:
+        get:
+            tags:
+                - AttractionService
+            operationId: AttractionService_GetAttractionDetailWithSlug
+            parameters:
+                - name: slugName
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetAttractionWithSlugResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/attraction/{attractionId}:
+        get:
+            tags:
+                - AttractionService
+            operationId: AttractionService_GetAttractionDetail
+            parameters:
+                - name: attractionId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AttractionServiceGetAttractionDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/attraction/{attractionId}/e-ticket:
+        get:
+            tags:
+                - AttractionService
+            operationId: AttractionService_GetETicket
+            parameters:
+                - name: attractionId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetETicketResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/attraction/{attractionId}/place-in-area:
+        get:
+            tags:
+                - AttractionService
+            operationId: AttractionService_GetPlaceInArea
+            parameters:
+                - name: attractionId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetPlaceInAreaResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/attraction/{attractionId}/share-link:
+        post:
+            tags:
+                - AttractionService
+            operationId: AttractionService_GetShareAttractionLink
+            parameters:
+                - name: attractionId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetShareAttractionLinkResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/attractions:
+        get:
+            tags:
+                - AttractionService
+            operationId: AttractionService_SearchAttraction
+            parameters:
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: regionIds
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: provinceIds
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: excludedIds
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SearchAttractionResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/attractions/search-suggestion:
+        get:
+            tags:
+                - AttractionService
+            operationId: AttractionService_SearchAttractionSuggestion
+            parameters:
+                - name: query
+                  in: query
+                  schema:
+                    type: string
+                - name: regionIds
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: provinceIds
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: excludedIds
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: skip
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SearchAttractionSuggestionResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/branch/{branchId}/products:
+        get:
+            tags:
+                - BranchService
+            operationId: BranchService_GetProductsByBranchId
+            parameters:
+                - name: branchId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetProductsByBranchIdResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/brand/{brandId}/branches:
+        get:
+            tags:
+                - BrandService
+            operationId: BrandService_GetBranchesByBrandId
+            parameters:
+                - name: brandId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.districtId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.subdistrictId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.areaId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.isIncludeAll
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBranchWithLocationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/product/{productId}/branches:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetBranchesByProductId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.districtId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.subdistrictId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.areaId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBranchWithLocationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/backend/attraction-service/product/{productId}/product-options:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetProductOptionByProductId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetProductOptionByProductIdResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/branch/{id}:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_GetBranch
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/branches:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_ListBranch
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.brandId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.branchId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.name
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.status
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/brand/{id}:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_GetBrand
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/brands:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_ListBrand
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.name
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.brandId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.branchId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.productId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.status
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/finance/{referenceKey}:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_GetBankAccountByReferenceKey
+            parameters:
+                - name: referenceKey
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/product-option-status:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_ListProductOptionsStatus
+            parameters:
+                - name: productId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListProductOptionsStatusResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/product/{id}:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_GetProduct
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: productOptionStatus
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/internal/attraction-service/oci/products:
+        get:
+            tags:
+                - OCIService
+            operationId: OCIService_ListProduct
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.name
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.brandId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.branchId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.productId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.status
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/mobile-public/attraction-service/product/{productId}/branches:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetBranchesByProductId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.districtId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.subdistrictId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.areaId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBranchWithLocationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/mobile/attraction-service/product/{productId}/branches:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetBranchesByProductId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.districtId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.subdistrictId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.areaId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBranchWithLocationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/mobile/attraction-service/product/{productId}/product-options:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetProductOptionByProductId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetProductOptionByProductIdResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service-public/attraction-service/content/attraction/{id}:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_GetAttraction
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service-public/attraction-service/content/attractions:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_ListAttraction
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.id
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.interestId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.tagId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service-public/attraction-service/content/attractions/search-by-name:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_ListAttractionWithName
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.id
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.interestId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.tagId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: sortBy
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service-public/attraction-service/content/filter-attractions:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_FilterAttraction
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service-public/attraction-service/interests:
+        get:
+            tags:
+                - InterestService
+            operationId: InterestService_ListInterest
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.interestId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.isDmt
+                  in: query
+                  schema:
+                    type: boolean
+                - name: filter.isTicket
+                  in: query
+                  schema:
+                    type: boolean
+                - name: filter.isExplore
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListInterestResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/bank-account/{referenceKey}:
+        get:
+            tags:
+                - BankAccountService
+            operationId: BankAccountService_GetBankAccountByReferenceKey
+            parameters:
+                - name: referenceKey
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBankAccountResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/branch/{branchId}/bank-account:
+        get:
+            tags:
+                - BranchService
+            operationId: BranchService_GetBankAccountByBranchId
+            parameters:
+                - name: branchId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBankAccountResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/branch/{branchId}/products:
+        get:
+            tags:
+                - BranchService
+            operationId: BranchService_GetProductsByBranchId
+            parameters:
+                - name: branchId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetProductsByBranchIdResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/branches:
+        get:
+            tags:
+                - BranchService
+            operationId: BranchService_ListBranch
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.name
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.description
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.branchType
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.status
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.merchantBranchCode
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.created.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.created.end
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.end
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBranchResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/brand/{brandId}/bank-account:
+        get:
+            tags:
+                - BrandService
+            operationId: BrandService_GetBankAccountByBrandId
+            parameters:
+                - name: brandId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBankAccountResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/brand/{brandId}/branches:
+        get:
+            tags:
+                - BrandService
+            operationId: BrandService_GetBranchesByBrandId
+            parameters:
+                - name: brandId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.districtId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.subdistrictId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.areaId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.isIncludeAll
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBranchWithLocationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/brand/{id}:
+        get:
+            tags:
+                - BrandService
+            operationId: BrandService_GetBrand
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: isRequiredMedia
+                  in: query
+                  schema:
+                    type: boolean
+                - name: isRequiredCondition
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBrandResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/brands:
+        get:
+            tags:
+                - BrandService
+            operationId: BrandService_ListBrand
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.name
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.description
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.slugName
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.status
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.created.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.created.end
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.end
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBrandResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/categories:
+        get:
+            tags:
+                - CategoryService
+            operationId: CategoryService_ListCategory
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.name
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.created.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.created.end
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.end
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListCategoryResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/category/{id}:
+        get:
+            tags:
+                - CategoryService
+            operationId: CategoryService_GetCategory
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCategoryResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/content/attraction/{id}:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_GetAttraction
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/content/attractions:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_ListAttraction
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.id
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.interestId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.tagId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/content/attractions/search-by-name:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_ListAttractionWithName
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.id
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.interestId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.tagId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+                - name: sortBy
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/content/filter-attractions:
+        get:
+            tags:
+                - ContentService
+            operationId: ContentService_FilterAttraction
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/design-my-trip/attraction-detail/{id}:
+        get:
+            tags:
+                - DesignMyTripService
+            operationId: DesignMyTripService_GetAttractionDetail
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetAttractionDetailResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/design-my-trip/attraction-details:
+        get:
+            tags:
+                - DesignMyTripService
+            operationId: DesignMyTripService_GetAttractionDetailList
+            parameters:
+                - name: ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetAttractionDetailListResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/design-my-trip/attractions-names:
+        get:
+            tags:
+                - DesignMyTripService
+            operationId: DesignMyTripService_GetAttractionNameList
+            parameters:
+                - name: ids
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetAttractionNameListResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/design-my-trip/candidate-attractions:
+        get:
+            tags:
+                - DesignMyTripService
+            operationId: DesignMyTripService_GetCandidateAttractions
+            parameters:
+                - name: interests
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: locations.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: locations.districtId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: locations.subdistrictId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: locations.areaId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: dayOfWeek
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: duration
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: startDate
+                  in: query
+                  schema:
+                    type: string
+                - name: isRequiredBranchCloseSchedule
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCandidateAttractionsResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/design-my-trip/candidate-attractions-by-location:
+        get:
+            tags:
+                - DesignMyTripService
+            operationId: DesignMyTripService_GetCandidateAttractionsByLocation
+            parameters:
+                - name: interests
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: locations.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: locations.districtId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: locations.subdistrictId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: locations.areaId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: dayOfWeek
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: duration
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: startDate
+                  in: query
+                  schema:
+                    type: string
+                - name: isRequiredBranchCloseSchedule
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCandidateAttractionsResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/design-my-trip/interest:
+        get:
+            tags:
+                - DesignMyTripService
+            operationId: DesignMyTripService_GetInterestByDesignMyTrip
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetInterestByDesignMyTripResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/email/e-ticket:
+        post:
+            tags:
+                - EmailService
+            operationId: EmailService_ShareETicketEmail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ShareETicketEmailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/interests:
+        get:
+            tags:
+                - InterestService
+            operationId: InterestService_ListInterest
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.interestId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.isDmt
+                  in: query
+                  schema:
+                    type: boolean
+                - name: filter.isTicket
+                  in: query
+                  schema:
+                    type: boolean
+                - name: filter.isExplore
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListInterestResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/product/{id}:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetProduct
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: isRequiredMedia
+                  in: query
+                  schema:
+                    type: boolean
+                - name: isRequiredDetail
+                  in: query
+                  schema:
+                    type: boolean
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetProductResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/product/{productId}/branches:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetBranchesByProductId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.regionId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.provinceId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.districtId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.subdistrictId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.areaId
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBranchWithLocationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/product/{productId}/product-option/{productOptionId}:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetProductOptionByProductOptionId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: productOptionId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetProductOptionByProductOptionIdResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/product/{productId}/product-options:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_GetProductOptionByProductId
+            parameters:
+                - name: productId
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetProductOptionByProductIdResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/service/attraction-service/products:
+        get:
+            tags:
+                - ProductService
+            operationId: ProductService_ListProduct
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: filter.productId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.brandId
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                - name: filter.name
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.description
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.status
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: filter.created.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.created.end
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.start
+                  in: query
+                  schema:
+                    type: string
+                - name: filter.updated.end
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListProductResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /healthz:
+        get:
+            tags:
+                - HealthCheckService
+            operationId: HealthCheckService_Health
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /readyz:
+        get:
+            tags:
+                - HealthCheckService
+            operationId: HealthCheckService_Ready
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DefaultMessage'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        AttractionName:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+        AttractionServiceGetAttractionDetailResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                brandName:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                interests:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/InterestResponse'
+                status:
+                    type: string
+                businessDays:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/BusinessDay'
+                spendTimeMin:
+                    type: integer
+                    format: int32
+                spendTimeMax:
+                    type: integer
+                    format: int32
+                contact:
+                    $ref: '#/components/schemas/Contact'
+                media:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Media'
+                locationLabel:
+                    type: string
+                googleMapUrl:
+                    type: string
+                googleRatingScore:
+                    type: number
+                    format: double
+                googleRatingCount:
+                    type: integer
+                    format: int32
+                areaLabel:
+                    type: string
+                isFavorite:
+                    type: boolean
+                slugName:
+                    type: string
+        BusinessDay:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                dayOfWeek:
+                    type: integer
+                    format: int32
+                isOpened:
+                    type: boolean
+                openAt:
+                    type: string
+                closeAt:
+                    type: string
+        CandidateAttraction:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                dayOfWeek:
+                    type: integer
+                    format: int32
+                openAt:
+                    type: string
+                closeAt:
+                    type: string
+                location:
+                    $ref: '#/components/schemas/CandidateAttractionLocation'
+                interests:
+                    type: string
+                isTicket:
+                    type: boolean
+                slugName:
+                    type: string
+        CandidateAttractionLocation:
+            type: object
+            properties:
+                region:
+                    $ref: '#/components/schemas/CandidateAttractionLocationFetch'
+                province:
+                    $ref: '#/components/schemas/CandidateAttractionLocationFetch'
+                district:
+                    $ref: '#/components/schemas/CandidateAttractionLocationFetch'
+                subdistrict:
+                    $ref: '#/components/schemas/CandidateAttractionLocationFetch'
+                area:
+                    $ref: '#/components/schemas/CandidateAttractionLocationFetch'
+                lat:
+                    type: number
+                    format: double
+                long:
+                    type: number
+                    format: double
+        CandidateAttractionLocationFetch:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+        Condition:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                text:
+                    type: string
+        Contact:
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: The identifying name of the contact person/organization.
+                url:
+                    type: string
+                    description: |-
+                        The URL pointing to the contact information. MUST be in the format of a
+                         URL.
+                email:
+                    type: string
+                    description: |-
+                        The email address of the contact person/organization. MUST be in the format
+                         of an email address.
+            description: |-
+                `Contact` is a representation of OpenAPI v2 specification's Contact object.
+
+                 See: https://github.com/OAI/OpenAPI-Specification/blob/3.0.0/versions/2.0.md#contactObject
+
+                 Example:
+
+                  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+                    info: {
+                      ...
+                      contact: {
+                        name: "gRPC-Gateway project";
+                        url: "https://github.com/grpc-ecosystem/grpc-gateway";
+                        email: "none@example.com";
+                      };
+                      ...
+                    };
+                    ...
+                  };
+        ContactPerson:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                position:
+                    type: string
+                phone:
+                    type: string
+                line:
+                    type: string
+                email:
+                    type: string
+        DefaultMessage:
+            type: object
+            properties:
+                status:
+                    type: string
+        GetAttractionDetailListResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GetAttractionDetailResponse'
+        GetAttractionDetailResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                isReservationRequired:
+                    type: boolean
+                productId:
+                    type: integer
+                    format: int32
+                productOptionId:
+                    type: integer
+                    format: int32
+                normalPriceThb:
+                    type: number
+                    format: double
+                media:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Media'
+                openingHours:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/BusinessDay'
+                location:
+                    $ref: '#/components/schemas/Location'
+                placeGoogleData:
+                    $ref: '#/components/schemas/PlaceGoogleData'
+                tagthaiPriceThb:
+                    type: number
+                    format: double
+                isMultiBranch:
+                    type: boolean
+                status:
+                    type: string
+                slugName:
+                    type: string
+                name:
+                    type: string
+                brandName:
+                    type: string
+                description:
+                    type: string
+        GetAttractionNameListResponse:
+            type: object
+            properties:
+                attractionNameList:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AttractionName'
+        GetAttractionWithSlugResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                brandName:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                interests:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/InterestResponse'
+                status:
+                    type: string
+                businessDays:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/BusinessDay'
+                spendTimeMin:
+                    type: integer
+                    format: int32
+                spendTimeMax:
+                    type: integer
+                    format: int32
+                contact:
+                    $ref: '#/components/schemas/Contact'
+                media:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Media'
+                locationLabel:
+                    type: string
+                googleMapUrl:
+                    type: string
+                googleRatingScore:
+                    type: number
+                    format: double
+                googleRatingCount:
+                    type: integer
+                    format: int32
+                areaLabel:
+                    type: string
+                isFavorite:
+                    type: boolean
+                slugName:
+                    type: string
+        GetBankAccountResponse:
+            type: object
+            properties:
+                accountNumber:
+                    type: string
+                accountName:
+                    type: string
+                bankName:
+                    type: string
+                taxId:
+                    type: string
+                accountType:
+                    type: string
+                emailForReport:
+                    type: string
+                bookBankImage:
+                    type: string
+        GetBrandResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                slugName:
+                    type: string
+                status:
+                    type: string
+                createdBy:
+                    type: string
+                updatedBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                media:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Media'
+                conditions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Condition'
+                contactPerson:
+                    $ref: '#/components/schemas/ContactPerson'
+                name:
+                    type: string
+                description:
+                    type: string
+        GetCandidateAttractionsResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/CandidateAttraction'
+        GetCategoryResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                createdBy:
+                    type: string
+                updatedBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                name:
+                    type: string
+        GetETicket:
+            type: object
+            properties:
+                productId:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                normalPrice:
+                    type: number
+                    format: double
+                tagthaiPrice:
+                    type: number
+                    format: double
+                media:
+                    $ref: '#/components/schemas/Media'
+        GetETicketResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GetETicket'
+        GetInterestByDesignMyTripResponse:
+            type: object
+            properties:
+                interests:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/InputOptions'
+        GetPlaceInArea:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                description:
+                    type: string
+                status:
+                    type: string
+                type:
+                    type: string
+                media:
+                    $ref: '#/components/schemas/Media'
+                placeGoogleData:
+                    $ref: '#/components/schemas/PlaceGoogleData'
+        GetPlaceInAreaResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GetPlaceInArea'
+        GetProductByBranchId:
+            type: object
+            properties:
+                productId:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+        GetProductOptionByProductId:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                productId:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                option:
+                    type: string
+                tagthaiPrice:
+                    type: number
+                    format: double
+                quantity:
+                    type: integer
+                    format: int32
+                allotmentType:
+                    type: string
+                status:
+                    type: string
+        GetProductOptionByProductIdResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GetProductOptionByProductId'
+        GetProductOptionByProductOptionIdResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                productId:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                option:
+                    type: string
+                status:
+                    type: string
+                normalPrice:
+                    type: number
+                    format: double
+                tagthaiPrice:
+                    type: number
+                    format: double
+                isPrimaryPrice:
+                    type: boolean
+        GetProductResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                status:
+                    type: string
+                saleType:
+                    type: string
+                createdBy:
+                    type: string
+                updatedBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                media:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Media'
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ProductDetail'
+                name:
+                    type: string
+                description:
+                    type: string
+        GetProductsByBranchIdResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GetProductByBranchId'
+        GetShareAttractionLinkResponse:
+            type: object
+            properties:
+                link:
+                    type: string
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        InputOptions:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+        Interest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                isActive:
+                    type: boolean
+                isDmt:
+                    type: boolean
+                icon:
+                    type: string
+                isExplore:
+                    type: boolean
+                isTicket:
+                    type: boolean
+                name:
+                    type: string
+        InterestResponse:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                isDmt:
+                    type: boolean
+                isTicket:
+                    type: boolean
+                isExplore:
+                    type: boolean
+                icon:
+                    type: string
+        ListBranch:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                branchType:
+                    type: string
+                status:
+                    type: string
+                slugName:
+                    type: string
+                createdBy:
+                    type: string
+                updatedBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                name:
+                    type: string
+        ListBranchResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ListBranch'
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+        ListBranchWithLocation:
+            type: object
+            properties:
+                branchId:
+                    type: integer
+                    format: int32
+                locationLabel:
+                    type: string
+                slugName:
+                    type: string
+        ListBranchWithLocationResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ListBranchWithLocation'
+        ListBrand:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                slugName:
+                    type: string
+                status:
+                    type: string
+                createdBy:
+                    type: string
+                updatedBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+        ListBrandResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ListBrand'
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+        ListCategory:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                createdBy:
+                    type: string
+                updatedBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                name:
+                    type: string
+        ListCategoryResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ListCategory'
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+        ListInterestResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Interest'
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+        ListProduct:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                status:
+                    type: string
+                createdBy:
+                    type: string
+                updatedBy:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                branchAmount:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                description:
+                    type: string
+        ListProductOptionsStatus:
+            type: object
+            properties:
+                productOptionId:
+                    type: integer
+                    format: int32
+                productId:
+                    type: integer
+                    format: int32
+                status:
+                    type: string
+        ListProductOptionsStatusResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ListProductOptionsStatus'
+        ListProductResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ListProduct'
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+        Location:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                regionId:
+                    type: integer
+                    format: int32
+                provinceId:
+                    type: integer
+                    format: int32
+                districtId:
+                    type: integer
+                    format: int32
+                subdistrictId:
+                    type: integer
+                    format: int32
+                areaId:
+                    type: integer
+                    format: int32
+                postcode:
+                    type: string
+                latitude:
+                    type: number
+                    format: double
+                longitude:
+                    type: number
+                    format: double
+                googleMapUrl:
+                    type: string
+                introduction:
+                    type: string
+                address:
+                    type: string
+                region:
+                    type: string
+                province:
+                    type: string
+                district:
+                    type: string
+                subDistrict:
+                    type: string
+                area:
+                    type: string
+        Media:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                mediaType:
+                    type: string
+                data:
+                    type: string
+                position:
+                    type: string
+                order:
+                    type: integer
+                    format: int32
+        Pagination:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                count:
+                    type: integer
+                    format: int32
+                pageTotal:
+                    type: integer
+                    format: int32
+        PlaceGoogleData:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                placeId:
+                    type: string
+                isSyncInformation:
+                    type: boolean
+                isSyncMedia:
+                    type: boolean
+                userRatingCount:
+                    type: integer
+                    format: int32
+                rating:
+                    type: number
+                    format: double
+        ProductDetail:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                type:
+                    type: string
+                icon:
+                    type: string
+                text:
+                    type: string
+        SearchAttractionFilter:
+            type: object
+            properties:
+                regions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/SearchFilter'
+                provinces:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/SearchFilter'
+        SearchAttractionResponse:
+            type: object
+            properties:
+                result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/SearchAttractionResult'
+                filters:
+                    $ref: '#/components/schemas/SearchAttractionFilter'
+                pagination:
+                    $ref: '#/components/schemas/Pagination'
+        SearchAttractionResult:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                brandId:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                description:
+                    type: string
+                status:
+                    type: string
+                type:
+                    type: string
+                media:
+                    $ref: '#/components/schemas/Media'
+                placeGoogleData:
+                    $ref: '#/components/schemas/PlaceGoogleData'
+                isFavorite:
+                    type: boolean
+                slugName:
+                    type: string
+        SearchAttractionSuggestionResponse:
+            type: object
+            properties:
+                suggestionNames:
+                    type: array
+                    items:
+                        type: string
+        SearchFilter:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                label:
+                    type: string
+        ShareETicketEmailRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+                attractionId:
+                    type: integer
+                    format: int32
+                productId:
+                    type: integer
+                    format: int32
+                productOptionId:
+                    type: integer
+                    format: int32
+                senderUserId:
+                    type: string
+                ticketNumber:
+                    type: string
+                redeemCode:
+                    type: string
+                reservationDate:
+                    type: string
+                expiredDate:
+                    type: string
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+tags:
+    - name: AttractionService
+    - name: BankAccountService
+    - name: BranchService
+    - name: BrandService
+    - name: CategoryService
+    - name: ContentService
+    - name: DesignMyTripService
+    - name: EmailService
+    - name: HealthCheckService
+    - name: InterestService
+    - name: OCIService
+    - name: ProductService

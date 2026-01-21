@@ -1,0 +1,19 @@
+/* ReDoc main logo styling (above search) */
+[role="navigation"] img,
+img[alt="Logo"] {
+  height: 120px !important;          /* larger height for bigger logo */
+  width: 100% !important;            /* full width */
+  max-width: 100% !important;
+  border-radius: 0 !important;       /* no rounded corners */
+  display: block !important;
+  margin: 0 !important;              /* no margin */
+  padding: 24px 28px !important;     /* inner padding */
+  object-fit: contain !important;    /* show full logo without cropping */
+  box-sizing: border-box !important;
+  background-color: #E84C4C !important; /* red background matching logo */
+}
+
+/* Optional: keep sidebar background consistent */
+[role="navigation"] {
+  background-color: #fafafa;
+}

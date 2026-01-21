@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+    title: "Service 2 API"
+    description: "API Documentation สำหรับ Service 2"
+    version: 1.0.0
+paths:
+    /api/example:
+        get:
+            tags:
+                - Example
+            summary: ตัวอย่าง API
+            operationId: getExample
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                        example: "Hello World"

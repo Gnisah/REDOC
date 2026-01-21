@@ -1,28 +1,90 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>API Documentation</title>
-    <meta charset="utf-8"/>
-  </head>
-  <link rel="stylesheet" href="style.css" />
-  <body>
-    <div id="sidebar-logo">
-      <img src="" />
-      <span>TEST</span>
-    </div>
-
-    <redoc
-      spec-url="openapi.yaml"
-      options='{
-        "hideDownloadButton": true,
-        "theme": {
-          "logo": {
-            "image": ""
-          }
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      }'
-    ></redoc>
-
-    <script src="https://cdn.jsdelivr.net/npm/redoc@2/bundles/redoc.standalone.js"></script>
-  </body>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+        }
+        .cards {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            width: 280px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 API Documentation</h1>
+        <p>เลือก API ที่ต้องการดู</p>
+        
+        <div class="cards">
+            <a href="api1/" class="card">
+                <div class="card-icon">🎯</div>
+                <h2>Attraction Service</h2>
+                <p>API สำหรับจัดการสถานที่ท่องเที่ยว</p>
+            </a>
+            
+            <a href="api2/" class="card">
+                <div class="card-icon">📦</div>
+                <h2>Service 2</h2>
+                <p>API สำหรับบริการอื่นๆ</p>
+            </a>
+        </div>
+    </div>
+</body>
 </html>
