@@ -8,6 +8,11 @@ info:
     x-logo:
         url: "https://play-lh.googleusercontent.com/hJUnoNdPEBWJ2YhN-peT1uwn6WIa69L0x_K-TRVDp1uhcsYM4ljPubNG11hN3Fh_NpQ"
         altText: "Logo"
+servers:
+    - url: https://api.example.com
+      description: Production server
+security:
+    - bearerAuth: []
 paths:
     /api/backend/design-my-trip-service/trip-input-options:
         get:

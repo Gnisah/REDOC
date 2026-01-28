@@ -1,0 +1,542 @@
+openapi: 3.0.0
+info:
+  title: Globaltix API Proxy
+  description: API for Globaltix integration services
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  - url: https://api.example.com
+    description: Production server
+  - url: http://localhost:8080
+    description: Local development server
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API Key for authorization
+
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        partnerResponse:
+          type: integer
+          example: 200
+        rawData:
+          type: object
+          properties:
+            data:
+              type: object
+            error:
+              type: object
+              nullable: true
+            size:
+              type: integer
+              nullable: true
+            success:
+              type: boolean
+
+    ReserveBookingRequest:
+      type: object
+      required:
+        - customer_name
+        - email
+        - payment_method
+        - ticket_types
+      properties:
+        alternate_email:
+          type: string
+          example: ''
+        customer_name:
+          type: string
+          example: Customer A
+        email:
+          type: string
+          format: email
+          example: customer.a@email.com
+        mobile_number:
+          type: string
+          example: ''
+        mobile_prefix:
+          type: string
+          example: ''
+        other_info:
+          type: object
+          properties:
+            partner_reference:
+              type: string
+        passport_number:
+          type: string
+          example: ''
+        payment_method:
+          type: string
+          enum:
+            - CREDIT
+            - DEBIT
+            - CASH
+          example: CREDIT
+        ticket_types:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 256022
+              quantity:
+                type: integer
+                example: 1
+              visit_date:
+                type: string
+                format: date
+                nullable: true
+              index:
+                type: integer
+                example: 0
+              question_list:
+                type: array
+                items:
+                  type: object
+              event_id:
+                type: integer
+                nullable: true
+              package_items:
+                type: array
+                items:
+                  type: object
+              visit_date_settings:
+                type: array
+                items:
+                  type: object
+        remarks:
+          type: string
+          example: ''
+
+    BookingActionRequest:
+      type: object
+      required:
+        - referenceNumber
+      properties:
+        referenceNumber:
+          type: string
+          example: 5XVT7OFCGT
+        remarks:
+          type: string
+          example: This is a test.
+
+security:
+  - BearerAuth: []
+  - ApiKeyAuth: []
+
+paths:
+  /api/globaltix/token:
+    get:
+      operationId: getGlobaltixToken
+      tags:
+        - Authentication
+      summary: Get Globaltix token in service
+      description: Retrieves the authentication token for Globaltix API access
+      security: [] 
+      responses:
+        '200':
+          description: Successful response - returns authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/products:
+    get:
+      operationId: getProductList
+      tags:
+        - Products
+      summary: Get product list
+      description: Retrieves a list of all available products from Globaltix
+      responses:
+        '200':
+          description: Successful response - returns list of products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/product/{id}:
+    get:
+      operationId: getProductById
+      tags:
+        - Products
+      summary: Get product info
+      description: Retrieves detailed information about a specific product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Product ID
+          example: 48184
+      responses:
+        '200':
+          description: Successful response - returns product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Product not found
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/product/options/{id}:
+    get:
+      operationId: getProductOptions
+      tags:
+        - Products
+      summary: Get product option list
+      description: Retrieves available options/variants for a specific product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Product ID
+          example: 48184
+        - name: lang
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - th
+              - en
+          description: Language code for response
+          example: th
+      responses:
+        '200':
+          description: Successful response - returns product options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Product not found
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/product/image/{image_id}:
+    get:
+      operationId: getProductImage
+      tags:
+        - Products
+      summary: Get product image
+      description: Retrieves image data for a product by image ID
+      parameters:
+        - name: image_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Image ID (UUID format)
+          example: 4d0e4391-ab7c-46c1-a621-8bd1b5406168
+      responses:
+        '200':
+          description: Successful response - returns image data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Image not found
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/product/changes:
+    get:
+      operationId: getProductChanges
+      tags:
+        - Products
+      summary: Get product changes
+      description: Retrieves list of products that have changed within a date range
+      parameters:
+        - name: country_id
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter by country ID
+          example: 8
+        - name: date_from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Start date for change detection (YYYY-MM-DD)
+          example: '2026-01-01'
+        - name: date_to
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: End date for change detection (YYYY-MM-DD)
+          example: '2026-12-30'
+        - name: city_id
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter by city ID
+          example: 48
+      responses:
+        '200':
+          description: Successful response - returns changed products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/booking/check-availability:
+    get:
+      operationId: checkBookingAvailability
+      tags:
+        - Bookings
+      summary: Check booking availability
+      description: Checks availability for booking within specified date range
+      parameters:
+        - name: date_from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: Start date (YYYY-MM-DD)
+          example: '2026-01-25'
+        - name: date_to
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          description: End date (YYYY-MM-DD)
+          example: '2026-10-26'
+        - name: time_slot
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Specific time slot to check
+        - name: ticket_type_id
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Ticket type ID to check availability
+          example: 275258
+        - name: option_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Option ID for specific product variant
+      responses:
+        '200':
+          description: Successful response - returns availability data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/booking/reserve:
+    post:
+      operationId: reserveBooking
+      tags:
+        - Bookings
+      summary: Reserve booking
+      description: Creates a reservation for tickets (booking is not yet confirmed)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReserveBookingRequest'
+      responses:
+        '200':
+          description: Successful response - booking reserved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request - invalid input
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/booking/confirm:
+    post:
+      operationId: confirmBooking
+      tags:
+        - Bookings
+      summary: Confirm booking
+      description: Confirms a previously reserved booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingActionRequest'
+      responses:
+        '200':
+          description: Successful response - booking confirmed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request - invalid reference number
+        '401':
+          description: Unauthorized
+        '404':
+          description: Booking not found
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/booking/details:
+    get:
+      operationId: getBookingDetails
+      tags:
+        - Bookings
+      summary: Get booking details
+      description: Retrieves detailed information about a specific booking
+      parameters:
+        - name: reference_number
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Globaltix reference number
+          example: 5XVT7OFCGT
+        - name: partner_reference_number
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Partner's reference number
+      responses:
+        '200':
+          description: Successful response - returns booking details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Booking not found
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/booking/release:
+    post:
+      operationId: releaseBooking
+      tags:
+        - Bookings
+      summary: Release booking
+      description: Releases a reserved booking (cancels before confirmation)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingActionRequest'
+      responses:
+        '200':
+          description: Successful response - booking released
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request - invalid reference number
+        '401':
+          description: Unauthorized
+        '404':
+          description: Booking not found
+        '500':
+          description: Internal server error
+
+  /api/service/partner-integration-service/globaltix/booking/revoke:
+    get:
+      operationId: revokeTransaction
+      tags:
+        - Bookings
+      summary: Revoke transaction
+      description: Revokes/cancels a confirmed booking transaction
+      parameters:
+        - name: reference_number
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Booking reference number to revoke
+          example: AIOXPESEGT
+      responses:
+        '200':
+          description: Successful response - transaction revoked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request - ticket already revoked
+        '401':
+          description: Unauthorized
+        '404':
+          description: Booking not found
+        '500':
+          description: Internal server error
+
+tags:
+  - name: Authentication
+    description: Authentication and token management
+  - name: Products
+    description: Product catalog operations
+  - name: Bookings
+    description: Booking management operations
